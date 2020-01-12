@@ -19,12 +19,24 @@ public class FibonacciPalindromeImpl implements FibonacciPalindrome {
         int max = 0, head = 0, tail = 0;
 
         for (int i = 0; i < sequenceArrayList.size() - max; i++) {
+
+            //avoid re-calculation
+            boolean calculateLastThree = false;
             for (int j = i + max; j < sequenceArrayList.size(); j++) {
-                if (condition2(sequenceArrayList, i, j)) {
+                if (calculateLastThree && j - i > 2 && condition2(sequenceArrayList, j - 2, j)) {
                     if (condition1(sequenceArrayList, i, j)) {
                         head = i;
                         tail = j;
                         max = j - i + 1;
+                    }
+                } else if (!calculateLastThree && condition2(sequenceArrayList, i, j)) {
+                    if (condition1(sequenceArrayList, i, j)) {
+                        head = i;
+                        tail = j;
+                        max = j - i + 1;
+                    }
+                    if (j - i >= 2) {
+                        calculateLastThree = true;
                     }
                 } else {
                         /*if this sub-sequence is meet condition2, there not exists a fibonacci palindrome start
@@ -56,7 +68,7 @@ public class FibonacciPalindromeImpl implements FibonacciPalindrome {
          sequence {a, b, c} in it satisfies at least one of these conditions: a==c, a+b==c, or a==b+c.*/
         int subsequenceSize = tail - head + 1;
         if (subsequenceSize > 2) {
-            for (int i = head; i < tail - 2; i++) {
+            for (int i = head; i < tail - 1; i++) {
                 if (!sequenceArrayList.get(i).equals(sequenceArrayList.get(i + 2))
                         && !(sequenceArrayList.get(i) + sequenceArrayList.get(i + 1) == sequenceArrayList.get(i + 2))
                         && !(sequenceArrayList.get(i) == sequenceArrayList.get(i + 1) + sequenceArrayList.get(i + 2))) {

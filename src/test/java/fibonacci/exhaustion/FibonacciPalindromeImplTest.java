@@ -17,6 +17,7 @@ public class FibonacciPalindromeImplTest {
         List<Integer> sequence = Arrays.asList(1, 2, 3, 0, 3, 2, 1);
         List<Integer> sequence2 = Arrays.asList(1, 2, 3, 0, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1);
         List<Integer> sequence3 = Arrays.asList(1, 2, 3);
+        List<Integer> sequence4 = Arrays.asList(1, 2, 3, 0, 3, 4, 2, 4, 2, 4, 2, 4, 2, 1);
         FibonacciPalindromeImpl fibonacciPalindrome = new FibonacciPalindromeImpl();
 
         Pair result = fibonacciPalindrome.findFibonacciPalindrome(sequence);
@@ -32,5 +33,9 @@ public class FibonacciPalindromeImplTest {
         Pair result3 = fibonacciPalindrome.findFibonacciPalindrome(sequence3);
         Assert.assertEquals(1, result3.getFirst());
         Assert.assertNull(result3.getSecond());
+
+        Pair result4 = fibonacciPalindrome.findFibonacciPalindrome(sequence4);
+        Assert.assertEquals(4, result4.getFirst());
+        Assert.assertEquals(2, result4.getSecond());
     }
 }
