@@ -20,22 +20,16 @@ public class FibonacciPalindromeImpl implements FibonacciPalindrome {
 
         for (int i = 0; i < sequenceArrayList.size() - max; i++) {
             for (int j = i + max; j < sequenceArrayList.size(); j++) {
-                if (max < 3 && condition1(sequenceArrayList, i, j)) {
-                    head = i;
-                    tail = j;
-                    max = j - i + 1;
+                if (condition2(sequenceArrayList, i, j)) {
+                    if (condition1(sequenceArrayList, i, j)) {
+                        head = i;
+                        tail = j;
+                        max = j - i + 1;
+                    }
                 } else {
-                    if (condition2(sequenceArrayList, i, j)) {
-                        if (condition1(sequenceArrayList, i, j)) {
-                            head = i;
-                            tail = j;
-                            max = j - i + 1;
-                        }
-                    } else {
                         /*if this sub-sequence is meet condition2, there not exists a fibonacci palindrome start
                         with sequence.get(i) bigger than current biggest one.*/
-                        break;
-                    }
+                    break;
                 }
             }
         }
